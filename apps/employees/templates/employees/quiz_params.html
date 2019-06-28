@@ -1,0 +1,39 @@
+{% extends "users/template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+{% load static %}
+<div class="login_container">
+<h1>Welcome to Employees quiz params.</h1>
+
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+<div class="container">
+  <form class="form-horizontal" action="/employees/quiz_paramiters/" method="post">
+      {% csrf_token %}
+    <div class="radio">
+      <label><input type="radio" name="optradio" checked>Boss</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio">Job Title</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio" disabled>Date of employment</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio" disabled>Your lesser known employees</label>
+    </div>
+
+  </form>
+
+
+</div>
+{% endblock %}

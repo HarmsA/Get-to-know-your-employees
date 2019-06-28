@@ -1,0 +1,47 @@
+{% extends "users/template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+{% load static %}
+<div class="login_container">
+<h1>Welcome to Employees list.</h1>
+
+{#        <img src="{% static 'users/profile_image/2a33607be3470df9689af7e21e7db3ea.jpg' %}" width="=240">#}
+{#        <img src="{% static employee.image.url %}" width="=240">#}
+<table>
+    <thead>
+        <tr>
+            <th class="_center">Name</th>
+            <th class="_center">Image</th>
+            <th class="_center">Boss</th>
+            <th class="_center">Your knowledge rating</th>
+            <th class="_center">Notes</th>
+            <th class="_center">Update</th>
+            <th class="_center">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if employees %}
+        {% for employee in employees %}
+        <tr>
+            <td class="_center">{{ employee.fname }} {{ employee.lname }}</td>
+            <td class="_center"><img src="{{ employee.photo.image }}"></td>
+            <td class="_center">{{ employee.boss }}</td>
+            <td class="_center">{{ employee.how_well_known.rating }}</td>
+            <td class="_center">{{ employee.notes }}</td>
+            <td class="_center"><a href="#" class="btn btn-warning">Update employee </a></td>
+            <td class="_center"><a href="{% url 'employees:delete' employee.id %}" class="btn btn-danger">Delete employee </a></td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
+
+
+
+{#        {{ employee.image.url }}<br>#}
+
+</div>
+{% endblock %}

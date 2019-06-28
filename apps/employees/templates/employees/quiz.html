@@ -1,0 +1,160 @@
+{% extends "users/template.html" %}
+
+<script>
+  function myFunction(fname, lname) {
+      print('In allert'*10);
+    alert(fname, " ", lname);
+  }
+</script>
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+{% load static %}
+
+<div class="center_container">
+<h1>Welcome to Employees quiz.</h1>
+
+<img class="large_image" src="{{ employee.photo.image }}">
+
+
+
+{#{% if messages %}#}
+{#<script type="text/javascript">#}
+{#    $(window).on('load',function(){#}
+{#        $('#myModal').modal('show');#}
+{#    });#}
+{#</script>#}
+{#{% endif %}#}
+<div class="center_list">
+{# Employee quiz #}
+      <form class="form-horizontal ajax_form" id="user_quiz_form" action="/employees/verify_quiz_entry/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="fname">First Name:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="fname" placeholder="First name" name="fname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="pname">Preferred Name:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="pname" placeholder="Leave blank if none" name="pname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="lname">Last Name:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="lname" placeholder="Last name" name="lname">
+            </div>
+        </div>
+          <input type="hidden"  name="id" value="{{ employee.id }}">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit"  class="employee_quiz_button">
+            </div>
+        </div>
+  </form>
+{#<!--   AJAX work#}
+{#<button id="button_json">Fetch httpresponse from employee/all.json</button>#}
+{#<button id="button_html">Fetch httpresponse from employee/all.html</button>#}
+
+  <div style="margin-top:25px; padding:10px; text-align: left" id="person_info">
+  </div>
+
+    <script>
+        {#$('#button_json').click(function(){#}
+        {#    console.log('Button json was clicked')#}
+        {#    $.ajax({#}
+        {#        url: '/employees/quiz_answer' ,#}
+        {#        success:function(serverResponse){#}
+        {#            console.log('success, serverResponse: ', serverResponse)#}
+        {#            $('#placeholder1').html(JSON.stringify(serverResponse))#}
+        {#        }#}
+        {#    })#}
+        {#{);#}
+
+        {#$('#button_html').click(function(){#}
+        {#    console.log('button.html is clicked')#}
+        {#     $.ajax({#}
+        {#        url: '/employees/quiz_answer.html/{{ employee.id }}'  ,#}
+        {#        success:function(serverResponse){#}
+        {#            console.log('success, serverResponse: ', serverResponse)#}
+        {#            $('#person_info').html(serverResponse)#}
+        {#        }#}
+        {#    })#}
+        {#{);#}
+
+        $('#user_quiz_form').submit(function(e) {
+            console.log('button.html is clicked')
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action') ,
+                method:'post',
+                data: $(this).serialize(),
+                    {#fname: $('#fname').val(),#}
+                    {#pname: $('#pname').val(),#}
+                    {#lname: $('#lname').val(),#}
+                    {#id: $('#id').val(),#}
+
+                success: function (serverResponse) {
+                    console.log("Success, Server Response: ", serverResponse);
+                    $('#person_info').html(serverResponse)
+                }
+            });
+        })
+    </script>
+{#-->#}
+
+{#    <ul class="quiz_list">#}
+{#        <li>First Name ->  {{ employee.fname }}</li>#}
+{#        <li>Preferred Name ->  {{ employee.preferred_fname }}</li>#}
+{#        <li>Last Name ->  {{ employee.lname }}</li>#}
+{#        <li>Job Title ->  {{ employee.jobtitle }}</li>#}
+{#    </ul>#}
+</div>
+
+
+{# ************Original answer with Popup ************** #}
+{#<div id="quiz_button">#}
+{#    <button type="active" id="quiz_button"  data-toggle="modal" data-target="#myModal">Answer</button>#}
+{#     <a href="{% url 'employees:quiz' %}" class="employee_quiz_button" id="quiz_button">Next employee</a>#}
+{#</div>#}
+
+<!-- Modal -->
+{#<div id="myModal" class="modal fade" role="dialog">#}
+{#  <div class="modal-dialog">#}
+{##}
+{#    <!-- Modal content-->#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+{#        <h4 class="modal-title">Name</h4>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#        {% if messages %}#}
+{#    <ul class="messages center_list">#}
+{#        {% for message in messages %}#}
+{#            <li>{{ message }}</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% endif %}#}
+{#      </div>#}
+{#      <div class="modal-footer">#}
+{#        <button type="button" class="btn btn-default" data-dismiss="modal" onclick = {% url 'employees:quiz' %}>Close</button>#}
+{#      </div>#}
+{#    </div>#}
+{##}
+{#  </div>#}
+{#</div>#}
+
+{#  <button onclick="myFunction({{ employee.fname }}, {{ employee.lname }})">Click to find name </button>#}
+
+    <br><br><br>
+{#{% endfor %}#}
+
+</div>
+
+{% endblock %}
+
