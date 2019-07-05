@@ -43,16 +43,20 @@ class EmployeeManager(models.Manager):
         lname = form['lname'].strip().capitalize()
         employee = Employee.objects.get(id=form['id'])
         if fname != employee.fname:
-            errors.append(f'First name is {employee.fname}')
+            first_name = employee.fname
+            errors.append(f'First name is {first_name}')
 
         if employee.preferred_fname:
             if pname != employee.preferred_fname:
-                errors.append(f'Perferred first name is {employee.preferred_fname}')
+                perferred_name = employee.preferred_fname
+
+                errors.append(f'Perferred first name is {perferred_name}')
         elif pname and not employee.preferred_fname:
             errors.append("Employee uses first name and not a preferred name.")
 
         if lname != employee.lname:
-            errors.append(f'Last name is {employee.lname}')
+            last_name = employee.lname
+            errors.append(f'Last name is {last_name}')
         return errors, employee
 
     def verify_update(self, form):

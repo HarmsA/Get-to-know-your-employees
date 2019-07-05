@@ -32,7 +32,7 @@ def process_register(request):
         user =User.objects.create_user(request.POST)
         print(user.f_name)
         request.session['user_id'] = user.id
-        return redirect('/dashboard')
+        return redirect('/home')
     return redirect('/login')
 
 
