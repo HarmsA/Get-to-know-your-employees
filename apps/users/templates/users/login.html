@@ -5,8 +5,8 @@
 
 {% block content %}
 
+<h1>Welcome to Gluhu, your get to know your employee website.</h1>
 <div class="login_container">
-<h1>Welcome to Handy Helper</h1>
         {% if messages %}
             <ul class="messages">
             {% for message in messages %}
@@ -16,7 +16,7 @@
         {% endif %}
     <div class="register">
         <h1>Register</h1>
-        <form action="/process_register/" method="post">
+        <form action="/process_register/" method="post" autocomplete="off" >
             {% csrf_token %}
             <div class="form-group">
                 <label for="f_name">First Name:</label>

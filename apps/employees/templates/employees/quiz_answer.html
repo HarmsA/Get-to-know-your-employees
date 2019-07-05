@@ -3,7 +3,7 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <title>Handy Helper- {% block title %}{% endblock %}</title>
+    <title>Gluhu {% block title %}{% endblock %}</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -18,54 +18,31 @@
 </head>
 
 <p>{{ encurage }}</p>
-            <a href="{% url 'employees:quiz' %}" class="employee_quiz_button">Next employee </a>
-{#{% if messages %}#}
-{#    <ul class="messages">#}
-{#    {% for message in messages %}#}
-{#            <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>#}
-{#    {% endfor %}#}
-{#    </ul>#}
-{#{% endif %}#}
+<body>
+
 <table>
     <thead>
         <tr>
-{#            <th>First Name</th>#}
-{#            <th>Preferred Name</th>#}
-{#            <th>Last Name</th>#}
-{#        </tr>#}
-{#    </thead>#}
-{#    <tbody>#}
-{#        <tr>#}
             {% if messages %}
-{#            <ul class="messages">#}
                 {% for message in messages %}
                         <td>{{ message }}</td>
                 {% endfor %}
-{#            </ul>#}
             {% endif %}
-{#            <td {% if employee.fname in messages %}id='background_messages'{% endif %}>#}
-{#                {{ employee.fname }}</td>#}
-{##}
-{#            <td {% if employee.preferred_fname in messages %}class='background_messages'{% endif %}>#}
-{#                {% if employee.preferred_fname %}{{ employee.preferred_fname }}{% else %}None{% endif %}</td>#}
-{##}
-{#            <td {% if employee.lname in messages %}class='background_messages'{% endif %}>#}
-{#                {{ employee.lname }}</td>#}
         </tr>
     </thead>
 </table>
+<a href="{% url 'employees:quiz' %}" class="employee_quiz_button" id="next_employee_btn">Next employee </a>
 
+</body>
 
-
-
-    <script>
-        $('#next_employee').click(function() {
-            $.ajax({
-                url: '/employees/quiz_answer',
-                success: function (serverResponse) {
-                    console.log('success, serverResponse: ', serverResponse)
-                    $('#placeholder1').html(serverResponse)
-                }
-            });
-        })
-    </script>
+<script>
+    $('#next_employee').click(function() {
+        $.ajax({
+            url: '/employees/quiz_answer',
+            success: function (serverResponse) {
+                console.log('success, serverResponse: ', serverResponse)
+                $('#placeholder1').html(serverResponse)
+            }
+        });
+    })
+</script>

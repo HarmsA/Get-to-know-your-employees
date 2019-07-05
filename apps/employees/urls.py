@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^quiz/$', views.quiz, name='quiz'),
     url(r'^verify_quiz_entry/$', views.verify_quiz_entry, name='verify_quiz_entry'),
     url(r'^quiz_answer/$', views.quiz_answer, name='quiz_answer'),
+    url(r'^update/(?P<employee_id>\d+)/$',views.update, name='update'),
+    url(r'^verify_update_employee/$',views.verify_update_employee, name='verify_update_employee'),
     url(r'^delete/(?P<employee_id>\d+)/$',views.delete, name='delete'),
 ]

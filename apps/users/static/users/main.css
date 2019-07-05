@@ -1,48 +1,75 @@
-table, th, td {
-    padding: 10px;
-    border: 1px solid black;
+
+.quiz_list {
+    border: 1px solid blue;
+
+    width: 250px;
+    text-align: left;
 }
-table {
-    margin-top: 20px;
-    width: 100%;
+
+#quiz_button {
+    display: block;
+    margin: 0px 10px 0 10px;
 }
-td:hover {
-    background-color: #f5f5f5;
+#quiz_button a {
+    text-decoration: none;
 }
+
+#background_messages {
+    background-color: green;
+}
+/*############ login.html ##################*/
+
+.login_container {
+    width: 70%;
+    display: inline-block;
+    padding-top: 1em;
+
+}
+.register {
+    display: inline;
+    width: 40%;
+    float: left;
+    vertical-align: top;
+}
+.register {
+    align-content: right;
+}
+.login {
+    vertical-align: top;
+    width: 45%;
+
+    float: right;
+}
+/*############ employee_list.html ##################*/
 
 ._center {
     text-align: center;
 }
-img {
-    width: 50px;
+
+/*############ Quiz.html ##################*/
+
+
+.center_container {
+    width: auto;
+    text-align: center;
+    padding: 5px 0 20px 0;
 }
 .large_image {
     height: 250px;
     width: auto;
 }
-
-.center_container {
-    width: auto;
-    text-align: center;
-    padding: 50px 0 20px 0;
-}
-.quiz_list {
-    width: 250px;
-    text-align: left;
-}
 .center_list {
-    padding: 10px 0 20px 0;
+    padding: 20px 0 20px 0;
     width: 600px;
     text-align: center;
     margin-right: auto;
     margin-left: auto;
 }
-#quiz_button {
-    display: inline-block;
-    margin: 0px 10px 0 10px;
-}
-#quiz_button a {
-    text-decoration: none;
+#form-group {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
 }
 .employee_quiz_button {
     background:    #999999;
@@ -55,6 +82,7 @@ img {
     font:          normal 25px/1 "Calibri", sans-serif;
     text-align:    center;
     text-shadow:   2px 2px #000000;
+    text-decoration: none;
 }.employee_quiz_button:hover {
     background:    #999999;
     background:    linear-gradient(#999999, #444444);
@@ -66,7 +94,39 @@ img {
     font:          normal bold 25px/1 "Calibri", sans-serif;
     text-align:    center;
     text-shadow:   2px 2px #000000;
+    text-decoration: none;
+
 }
-#background_messages {
-    background-color: red;
+ #person_info {
+     margin-top: 26px;
+     padding: 10px;
+     text-align: left;
+ }
+
+ img {
+    width: 50px;
+}
+
+ /*############ Quiz_answer.html ##################*/
+
+ #next_employee_btn {
+    margin-top: 15px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    align-content: center;
+    display: block;
+    text-decoration: none;
+}
+table, th, td {
+    padding: 10px;
+    border: 1px solid black;
+}
+table {
+    margin-top: 10px;
+    width: 100%;
+}
+td:hover {
+    background-color: #f5f5f5;
 }

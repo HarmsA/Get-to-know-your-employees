@@ -1,0 +1,89 @@
+{% extends "users/template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <h1>Welcome to Update an employees.</h1>
+
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+  <form class="form-horizontal" action="/employees/verify_update_employee/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="fname">First Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="fname" value="{{ employee.fname }}"" name="fname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pname">Preferred Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="pname" value="{{ employee.preferred_fname }}" name="pname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="lname">Last Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lname" value="{{ employee.lname }}" name="lname">
+            </div>
+        </div>
+          <input type="hidden"  name="id" value="{{ employee.id }}">
+{#        <div class="form-group">#}
+{#            <label class="control-label col-sm-2" for="boss">Boss:</label>#}
+{#            <div class="col-sm-10">#}
+{#                <input type="text" class="form-control" id="boss" placeholder="Boss's name" name="boss">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <label class="control-label col-sm-2" for="start_date">Date of Employment:</label>#}
+{#            <div class="col-sm-10">#}
+{#                <input type="date" class="form-control" id="start_date" placeholder="Start Date" name="start_date">#}
+{#            </div>#}
+{#        </div>#}
+{#      <div class="form-group">#}
+{#            <label class="control-label col-sm-2" for="dob">Date of Birth:</label>#}
+{#            <div class="col-sm-10">#}
+{#                <input type="date" class="form-control" id="dob" placeholder="Start Date" name="dob">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <label class="control-label col-sm-2" for="jobtitle">Job Title:</label>#}
+{#            <div class="col-sm-10">#}
+{#                <input type="text" class="form-control" id="jobtitle" placeholder="Job Title" name="jobtitle">#}
+{#            </div>#}
+{#        </div>#}
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="image">Picture of yourself:</label>
+            <div class="col-sm-10">
+                <input type="file" name="employee_image"> {#   accept="image/*" id="image">#}
+            </div>
+        </div>
+{#        <div class="form-group">#}
+{#            <label class="control-label col-sm-2" for="notes">notes:</label>#}
+{#            <div class="col-sm-10">#}
+{#                <input type="text" class="form-control" id="notes" placeholder="notes" name="notes">#}
+{#            </div>#}
+{#        </div>#}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+  </form>
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  {% endif %}
+
+</div>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 from apps.users.models import User
 from datetime import datetime
+from pyuploadcare.dj.models import ImageField
 from django.db.models.signals import post_delete, pre_delete
 from quiz.settings import BASE_DIR
 from django.dispatch import receiver
@@ -35,6 +36,45 @@ class EmployeeManager(models.Manager):
         )
         return employee
 
+    def verify_quiz(self, form):
+        errors = []
+        fname = form['fname'].strip().capitalize()
+        pname = form['pname'].strip().capitalize()
+        lname = form['lname'].strip().capitalize()
+        employee = Employee.objects.get(id=form['id'])
+        if fname != employee.fname:
+            errors.append(f'First name is {employee.fname}')
+
+        if employee.preferred_fname:
+            if pname != employee.preferred_fname:
+                errors.append(f'Perferred first name is {employee.preferred_fname}')
+        elif pname and not employee.preferred_fname:
+            errors.append("Employee uses first name and not a preferred name.")
+
+        if lname != employee.lname:
+            errors.append(f'Last name is {employee.lname}')
+        return errors, employee
+
+    def verify_update(self, form):
+        errors = []
+        if len(form['fname'])<1:
+            errors.append('Must have a First Name')
+        if len(form['lname'])<1:
+            errors.append('Must have a Last Name')
+        # if errors:
+        return errors
+        # else:
+        #     fname = form['fname'].strip().capitalize()
+        #     pname = form['pname'].strip().capitalize()
+        #     lname = form['lname'].strip().capitalize()
+        #     employee = Employee.objects.get(id=form['id'])
+        #     employee = self.save(
+        #         fname = fname,
+        #         preferred_fname = pname,
+        #         lname = lname
+        #     )
+
+
 class Employee(models.Model):
     fname = models.CharField(max_length=255)
     preferred_fname = models.CharField(max_length=100, blank=True)
@@ -63,7 +103,7 @@ class EmployeeImageManager(models.Manager):
         employee = Employee.objects.get(id=employee_id)
         image = self.create(
             employee=employee,
-            image=employee_image
+            image=employee_image,
         )
         return image
 
@@ -72,6 +112,8 @@ class EmployeeImageManager(models.Manager):
 class Employee_Image(models.Model):
     employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name='photo')
     image = models.ImageField(upload_to='media/', blank=True)
+    title = models.CharField(max_length=255, default='Employee Photo')
+    # image = ImageField(blank=True, manual_crop='')
     objects = EmployeeImageManager()
 
 

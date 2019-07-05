@@ -1,4 +1,4 @@
-{% extends "users/login_template.html" %}
+{% extends "users/template.html" %}
 
 {% block title %}{{ title }}{% endblock %}
 
@@ -9,6 +9,12 @@
 <h1>Welcome to Get to know your employees.</h1>
 
 <p>How well do you know your staff? </p>
+
+<div>
+    <a class="employee_quiz_button" href="{% url 'employees:add_employee' %}">Add Employee</a>
+    <a class="employee_quiz_button" href="{% url 'employees:view_employees' %}">View All Employees</a>
+    <a class="employee_quiz_button" href="{% url 'employees:quiz' %}">Employee Quiz</a>
+</div>
 
 </div>
 {% endblock %}
